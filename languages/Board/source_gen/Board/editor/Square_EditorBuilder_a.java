@@ -55,6 +55,7 @@ import org.jetbrains.mps.openapi.language.SConcept;
     editorCell.addEditorCell(createProperty_0());
     editorCell.addEditorCell(createConstant_2());
     editorCell.addEditorCell(createProperty_1());
+    editorCell.addEditorCell(createComponent_0());
     return editorCell;
   }
   private EditorCell createConstant_0() {
@@ -124,6 +125,10 @@ import org.jetbrains.mps.openapi.language.SConcept;
     } finally {
       getCellFactory().popCellContext();
     }
+  }
+  private EditorCell createComponent_0() {
+    EditorCell editorCell = getCellFactory().createEditorComponentCell(myNode, "Board.editor.ShapeColor");
+    return editorCell;
   }
 
   private static final class PROPS {

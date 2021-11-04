@@ -13,9 +13,12 @@ import jetbrains.mps.smodel.runtime.impl.ConceptDescriptorBuilder2;
 import jetbrains.mps.smodel.adapter.ids.PrimitiveTypeId;
 
 public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
+  /*package*/ final ConceptDescriptor myConceptCanvas = createDescriptorForCanvas();
   /*package*/ final ConceptDescriptor myConceptColor = createDescriptorForColor();
   /*package*/ final ConceptDescriptor myConceptColorReference = createDescriptorForColorReference();
-  /*package*/ final ConceptDescriptor myConceptField = createDescriptorForField();
+  /*package*/ final ConceptDescriptor myConceptMonster = createDescriptorForMonster();
+  /*package*/ final ConceptDescriptor myConceptObject = createDescriptorForObject();
+  /*package*/ final ConceptDescriptor myConceptPlayer = createDescriptorForPlayer();
   /*package*/ final ConceptDescriptor myConceptShape = createDescriptorForShape();
   /*package*/ final ConceptDescriptor myConceptSquare = createDescriptorForSquare();
   private final LanguageConceptSwitch myIndexSwitch;
@@ -32,19 +35,25 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
 
   @Override
   public Collection<ConceptDescriptor> getDescriptors() {
-    return Arrays.asList(myConceptColor, myConceptColorReference, myConceptField, myConceptShape, myConceptSquare);
+    return Arrays.asList(myConceptCanvas, myConceptColor, myConceptColorReference, myConceptMonster, myConceptObject, myConceptPlayer, myConceptShape, myConceptSquare);
   }
 
   @Override
   @Nullable
   public ConceptDescriptor getDescriptor(SConceptId id) {
     switch (myIndexSwitch.index(id)) {
+      case LanguageConceptSwitch.Canvas:
+        return myConceptCanvas;
       case LanguageConceptSwitch.Color:
         return myConceptColor;
       case LanguageConceptSwitch.ColorReference:
         return myConceptColorReference;
-      case LanguageConceptSwitch.Field:
-        return myConceptField;
+      case LanguageConceptSwitch.Monster:
+        return myConceptMonster;
+      case LanguageConceptSwitch.Object:
+        return myConceptObject;
+      case LanguageConceptSwitch.Player:
+        return myConceptPlayer;
       case LanguageConceptSwitch.Shape:
         return myConceptShape;
       case LanguageConceptSwitch.Square:
@@ -59,6 +68,15 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     return myIndexSwitch.index(c);
   }
 
+  private static ConceptDescriptor createDescriptorForCanvas() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("Board", "Canvas", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3d3dcf8ac84cf074L);
+    b.class_(false, false, true);
+    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
+    b.origin("r:8e2745a5-63e4-4864-ae0e-158949e5762f(Board.structure)/4412911404865876084");
+    b.version(2);
+    b.aggregate("shape", 0x3d3dcf8ac84eb68fL).target(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3d3dcf8ac84f55b1L).optional(true).ordered(true).multiple(true).origin("4412911404865992335").done();
+    return b.create();
+  }
   private static ConceptDescriptor createDescriptorForColor() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("Board", "Color", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x65da13cf7add2c5cL);
     b.class_(false, false, true);
@@ -76,13 +94,27 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.associate("target", 0x7d7d4e1b80319588L).target(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x65da13cf7add2c5cL).optional(false).origin("9042469506851640712").done();
     return b.create();
   }
-  private static ConceptDescriptor createDescriptorForField() {
-    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("Board", "Field", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3d3dcf8ac84cf074L);
-    b.class_(false, false, true);
-    b.parent(0xceab519525ea4f22L, 0x9b92103b95ca8c0cL, 0x110396eaaa4L);
-    b.origin("r:8e2745a5-63e4-4864-ae0e-158949e5762f(Board.structure)/4412911404865876084");
+  private static ConceptDescriptor createDescriptorForMonster() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("Board", "Monster", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x5ae320f31d236618L);
+    b.class_(false, false, false);
+    b.super_("Board.structure.Object", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x5ae320f31d236615L);
+    b.origin("r:8e2745a5-63e4-4864-ae0e-158949e5762f(Board.structure)/6549114511664834072");
     b.version(2);
-    b.aggregate("shape", 0x3d3dcf8ac84eb68fL).target(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3d3dcf8ac84f55b1L).optional(true).ordered(true).multiple(true).origin("4412911404865992335").done();
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForObject() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("Board", "Object", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x5ae320f31d236615L);
+    b.class_(false, false, true);
+    b.origin("r:8e2745a5-63e4-4864-ae0e-158949e5762f(Board.structure)/6549114511664834069");
+    b.version(2);
+    return b.create();
+  }
+  private static ConceptDescriptor createDescriptorForPlayer() {
+    ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("Board", "Player", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x5ae320f31d236616L);
+    b.class_(false, false, false);
+    b.super_("Board.structure.Object", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x5ae320f31d236615L);
+    b.origin("r:8e2745a5-63e4-4864-ae0e-158949e5762f(Board.structure)/6549114511664834070");
+    b.version(2);
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForShape() {
@@ -90,11 +122,12 @@ public class StructureAspectDescriptor extends BaseStructureAspectDescriptor {
     b.class_(false, true, false);
     b.origin("r:8e2745a5-63e4-4864-ae0e-158949e5762f(Board.structure)/4412911404866033073");
     b.version(2);
+    b.aggregate("color", 0x4a87030eec86eb63L).target(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x7d7d4e1b80319587L).optional(false).ordered(true).multiple(false).origin("5370264443295296355").done();
     return b.create();
   }
   private static ConceptDescriptor createDescriptorForSquare() {
     ConceptDescriptorBuilder2 b = new ConceptDescriptorBuilder2("Board", "Square", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3440514ce984307dL);
-    b.class_(false, true, false);
+    b.class_(false, false, false);
     b.super_("Board.structure.Shape", 0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3d3dcf8ac84f55b1L);
     b.origin("r:8e2745a5-63e4-4864-ae0e-158949e5762f(Board.structure)/3765098679258853501");
     b.version(2);

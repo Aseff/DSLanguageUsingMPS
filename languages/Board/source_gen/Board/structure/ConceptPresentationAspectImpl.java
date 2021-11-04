@@ -9,9 +9,12 @@ import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import jetbrains.mps.smodel.runtime.ConceptPresentationBuilder;
 
 public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase {
+  private ConceptPresentation props_Canvas;
   private ConceptPresentation props_Color;
   private ConceptPresentation props_ColorReference;
-  private ConceptPresentation props_Field;
+  private ConceptPresentation props_Monster;
+  private ConceptPresentation props_Object;
+  private ConceptPresentation props_Player;
   private ConceptPresentation props_Shape;
   private ConceptPresentation props_Square;
 
@@ -20,6 +23,13 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
   public ConceptPresentation getDescriptor(SAbstractConcept c) {
     StructureAspectDescriptor structureDescriptor = (StructureAspectDescriptor) myLanguageRuntime.getAspect(jetbrains.mps.smodel.runtime.StructureAspectDescriptor.class);
     switch (structureDescriptor.internalIndex(c)) {
+      case LanguageConceptSwitch.Canvas:
+        if (props_Canvas == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.presentationByName();
+          props_Canvas = cpb.create();
+        }
+        return props_Canvas;
       case LanguageConceptSwitch.Color:
         if (props_Color == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -34,13 +44,27 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
           props_ColorReference = cpb.create();
         }
         return props_ColorReference;
-      case LanguageConceptSwitch.Field:
-        if (props_Field == null) {
+      case LanguageConceptSwitch.Monster:
+        if (props_Monster == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
-          cpb.presentationByName();
-          props_Field = cpb.create();
+          cpb.rawPresentation("Monster");
+          props_Monster = cpb.create();
         }
-        return props_Field;
+        return props_Monster;
+      case LanguageConceptSwitch.Object:
+        if (props_Object == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Object");
+          props_Object = cpb.create();
+        }
+        return props_Object;
+      case LanguageConceptSwitch.Player:
+        if (props_Player == null) {
+          ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("Player");
+          props_Player = cpb.create();
+        }
+        return props_Player;
       case LanguageConceptSwitch.Shape:
         if (props_Shape == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
@@ -50,6 +74,7 @@ public class ConceptPresentationAspectImpl extends ConceptPresentationAspectBase
       case LanguageConceptSwitch.Square:
         if (props_Square == null) {
           ConceptPresentationBuilder cpb = new ConceptPresentationBuilder();
+          cpb.rawPresentation("square");
           props_Square = cpb.create();
         }
         return props_Square;

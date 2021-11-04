@@ -8,6 +8,7 @@ import java.util.Collection;
 import jetbrains.mps.openapi.editor.descriptor.ConceptEditor;
 import org.jetbrains.mps.openapi.language.SAbstractConcept;
 import java.util.Collections;
+import jetbrains.mps.openapi.editor.descriptor.ConceptEditorComponent;
 import jetbrains.mps.openapi.editor.descriptor.SubstituteMenu;
 import jetbrains.mps.lang.smodel.ConceptSwitchIndex;
 import jetbrains.mps.lang.smodel.ConceptSwitchIndexBuilder;
@@ -19,22 +20,39 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
     SAbstractConcept cncpt = ((SAbstractConcept) concept);
     switch (conceptIndex.index(cncpt)) {
       case 0:
-        return Collections.<ConceptEditor>singletonList(new Color_Editor());
+        return Collections.<ConceptEditor>singletonList(new Canvas_Editor());
       case 1:
-        return Collections.<ConceptEditor>singletonList(new ColorReference_Editor());
+        return Collections.<ConceptEditor>singletonList(new Color_Editor());
       case 2:
+        return Collections.<ConceptEditor>singletonList(new ColorReference_Editor());
+      case 3:
         return Collections.<ConceptEditor>singletonList(new Square_Editor());
       default:
     }
     return Collections.<ConceptEditor>emptyList();
   }
 
+  @NotNull
+  public Collection<ConceptEditorComponent> getDeclaredEditorComponents(SAbstractConcept concept, String editorComponentId) {
+    SAbstractConcept cncpt = ((SAbstractConcept) concept);
+    switch (conceptIndex1.index(cncpt)) {
+      case 0:
+        if (true) {
+          if ("Board.editor.ShapeColor".equals(editorComponentId)) {
+            return Collections.<ConceptEditorComponent>singletonList(new ShapeColor());
+          }
+        }
+        break;
+      default:
+    }
+    return Collections.<ConceptEditorComponent>emptyList();
+  }
 
   @NotNull
   @Override
   public Collection<SubstituteMenu> getDeclaredDefaultSubstituteMenus(SAbstractConcept concept) {
     SAbstractConcept cncpt = concept;
-    switch (conceptIndex1.index(cncpt)) {
+    switch (conceptIndex2.index(cncpt)) {
       case 0:
         return Collections.<SubstituteMenu>singletonList(new ColorReference_SubstituteMenu());
       default:
@@ -42,6 +60,7 @@ public class EditorAspectDescriptorImpl extends EditorAspectDescriptorBase {
     return Collections.<SubstituteMenu>emptyList();
   }
 
-  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x65da13cf7add2c5cL), MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x7d7d4e1b80319587L), MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3440514ce984307dL)).seal();
-  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x7d7d4e1b80319587L)).seal();
+  private static final ConceptSwitchIndex conceptIndex = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3d3dcf8ac84cf074L), MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x65da13cf7add2c5cL), MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x7d7d4e1b80319587L), MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3440514ce984307dL)).seal();
+  private static final ConceptSwitchIndex conceptIndex1 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x3d3dcf8ac84f55b1L)).seal();
+  private static final ConceptSwitchIndex conceptIndex2 = new ConceptSwitchIndexBuilder().put(MetaIdFactory.conceptId(0x2d064a06718f4b44L, 0x8bef870f5b7946beL, 0x7d7d4e1b80319587L)).seal();
 }

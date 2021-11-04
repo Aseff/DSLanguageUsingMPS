@@ -46,7 +46,6 @@
   <node concept="1TIwiD" id="3h0kkNDx31X">
     <property role="EcuMT" value="3765098679258853501" />
     <property role="TrG5h" value="Square" />
-    <property role="R5$K7" value="true" />
     <property role="34LRSv" value="square" />
     <ref role="1TJDcQ" node="3OXNSF8jPmL" resolve="Shape" />
     <node concept="1TJgyi" id="3h0kkNDx31Y" role="1TKVEl">
@@ -83,7 +82,7 @@
   </node>
   <node concept="1TIwiD" id="3OXNSF8jf1O">
     <property role="EcuMT" value="4412911404865876084" />
-    <property role="TrG5h" value="Field" />
+    <property role="TrG5h" value="Canvas" />
     <property role="19KtqR" value="true" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
     <node concept="PrWs8" id="3OXNSF8jf1P" role="PzmwI">
@@ -102,6 +101,13 @@
     <property role="TrG5h" value="Shape" />
     <property role="R5$K7" value="true" />
     <ref role="1TJDcQ" to="tpck:gw2VY9q" resolve="BaseConcept" />
+    <node concept="1TJgyj" id="4E70KVGxIHz" role="1TKVEi">
+      <property role="IQ2ns" value="5370264443295296355" />
+      <property role="20lmBu" value="fLJjDmT/aggregation" />
+      <property role="20kJfa" value="color" />
+      <property role="20lbJX" value="fLJekj4/_1" />
+      <ref role="20lvS9" node="7PXjxI0cpm7" resolve="ColorReference" />
+    </node>
   </node>
   <node concept="1TIwiD" id="5Fz8fct8Qol">
     <property role="EcuMT" value="6549114511664834069" />
